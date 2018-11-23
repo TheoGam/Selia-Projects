@@ -26,7 +26,8 @@ namespace TodoList.Models
 
         public void CreateTask(string description, User user)
         {
-            Tache newTask = new Tache { Description = description, User = user };
+            Tache newTask = new Tache { Description = description, User = user, CreationDate = DateTime.Now,
+            IsArchived = false, IsCompleted = false };
             bdd.Taches.Add(newTask);
             bdd.SaveChanges();
         }
@@ -40,6 +41,17 @@ namespace TodoList.Models
         {
             bdd.Users.Add(new User { Name = name });
             bdd.SaveChanges();
+        }
+
+        public List<Tache> GetCompletedTasks()
+        {
+            string query = "SELECT * FROM Taches WHERE IsArchived = 0 AND IsCompleted = 1";
+            return bdd.Taches.SqlQuery(query).ToList();
+        }
+        public List<Tache> GetNotCompletedTasks()
+        {
+            string query = "SELECT * FROM Taches WHERE IsArchived = 0 AND IsCompleted = 0";
+            return bdd.Taches.SqlQuery(query).ToList();
         }
 
     }

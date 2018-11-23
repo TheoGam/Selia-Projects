@@ -12,5 +12,7 @@ namespace TodoList.Models
         void CreateTask(string description, User user);
         List<User> GetAllUsers();
         void CreateUser(string name);
+        List<Tache> GetCompletedTasks();
+        List<Tache> GetNotCompletedTasks();
     }
 }

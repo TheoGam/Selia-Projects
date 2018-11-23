@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "AddNewTask";
+}
+
+<h2>AddNewTask</h2>
+@using (Html.BeginForm("PostAddNewTask", "Home"))
+
+{
+
+    @Html.Label("description", "Description de la tâche")
+
+    @Html.TextArea("description")
+
+    @Html.Label("username", "Responsable")
+
+    @Html.TextBox("username")
+
+    <input type="submit" value="Envoyer" />
+
+}
+
+

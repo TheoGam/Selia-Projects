@@ -10,6 +10,5 @@ namespace TodoList.Models
     {
         public DbSet<Tache> Taches { get; set; }
         public DbSet<User> Users { get; set; }
-  
     }
 }
