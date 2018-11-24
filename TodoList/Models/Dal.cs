@@ -54,5 +54,31 @@ namespace TodoList.Models
             return bdd.Taches.SqlQuery(query).ToList();
         }
 
+        public void DeleteTask(int id)
+        {
+            // Obtenir la tâche à supprimer
+            var taskToDelete = bdd.Taches.First(m => m.Id == id);
+
+            // Suppression
+            bdd.Taches.Remove(taskToDelete);
+            bdd.SaveChanges();
+        }
+
+        public Tache GetTask(int id)
+        {
+            return bdd.Taches.FirstOrDefault(t => t.Id == id);
+        }
+
+        public void EditTask(int id, string description, string responsable)
+        {
+            Tache tacheToUpdate = bdd.Taches.FirstOrDefault(t => t.Id == id);
+            if (tacheToUpdate != null)
+            {
+                tacheToUpdate.Description = description;
+                tacheToUpdate.User = new User { Name = responsable };
+                bdd.SaveChanges();
+            }
+        }
+
     }
 }

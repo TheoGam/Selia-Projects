@@ -44,5 +44,34 @@ namespace TodoList.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult PostDeleteTask(int id)
+        {
+            dal.DeleteTask(id);
+            // Affiche la vue Index
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult EditTask(int id)
+        {
+            Tache tacheToUpdate = dal.GetTask(id);
+            if (tacheToUpdate != null)
+            {
+                ViewData.Model = tacheToUpdate;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult PostEditTask(int id, string description, string responsable)
+        {
+            dal.EditTask(id,description,responsable);
+            return RedirectToAction("Index");
+        }
     }
 }
